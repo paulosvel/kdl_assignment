@@ -3,55 +3,146 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import {
   Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-  getKeyValue,
-  Button
-} from "@nextui-org/react";
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
+  Button,
+} from "@chakra-ui/react";
+
+import "./index.css";
+import EditModal from "./EditModal";
 function Users() {
   const url = "https://jsonplaceholder.typicode.com/users";
   const [users, setUsers] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const getUsers = async () => {
+    const response = await axios
+      .get(url)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    setUsers(response);
+  };
 
-  const getUsers = async() => {
-  const response = await  axios 
-    .get(url)
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  setUsers(response);
-  }
-  
   useEffect(() => {
     getUsers();
   }, []);
-
+  const handleEditModal = () => {
+    setIsOpen(!isOpen);
+  };
   return (
-    <div style={{display:"flex",alignItems:"center", flexDirection:"column"}}>
+    <div
+      style={{ display: "flex", alignItems: "center", flexDirection: "column" }}
+    >
       <h1>User List</h1>
-      <Table style={{border:"1px solid black"}}>
-        <TableHeader>
-          <TableColumn>Name</TableColumn>
-          <TableColumn>Email</TableColumn>
-          <TableColumn>Company Name</TableColumn>
-          <TableColumn>Actions</TableColumn>
-        </TableHeader>
-        <TableBody>
-          {users.map((user) => (
-            <TableRow>
-              <TableCell>{user.name}</TableCell>
-              <TableCell>{user.email}</TableCell>
-              <TableCell>{user.company.name}</TableCell>
-            <TableCell>  <Button>Edit User</Button> <Button>Delete User</Button></TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+      <Button className="add" sx={{ marginBottom: "9px", marginTop: "-5px" }}>
+        Add User
+      </Button>
+      <TableContainer>
+        <Table
+          variant="simple"
+          sx={{ borderCollapse: "collapse", width: "100%" }}
+        >
+          <Thead>
+            <Th
+              sx={{
+                border: "1px solid #ddd",
+                textAlign: "left",
+                padding: "8px",
+                backgroundColor: "#f2f2f2",
+              }}
+            >
+              Name
+            </Th>
+            <Th
+              sx={{
+                border: "1px solid #ddd",
+                textAlign: "left",
+                padding: "8px",
+                backgroundColor: "#f2f2f2",
+              }}
+            >
+              Email
+            </Th>
+            <Th
+              sx={{
+                border: "1px solid #ddd",
+                textAlign: "left",
+                padding: "8px",
+                backgroundColor: "#f2f2f2",
+              }}
+            >
+              Company Name
+            </Th>
+            <Th
+              sx={{
+                border: "1px solid #ddd",
+                textAlign: "left",
+                padding: "8px",
+                backgroundColor: "#f2f2f2",
+              }}
+            >
+              Actions
+            </Th>
+          </Thead>
+          <Tbody>
+            {users.map((user) => (
+              <Tr>
+                <Td
+                  sx={{
+                    border: "1px solid #ddd",
+                    textAlign: "left",
+                    padding: "8px",
+                  }}
+                >
+                  {user.name}
+                </Td>
+                <Td
+                  sx={{
+                    border: "1px solid #ddd",
+                    textAlign: "left",
+                    padding: "8px",
+                  }}
+                >
+                  {user.email}
+                </Td>
+                <Td
+                  sx={{
+                    border: "1px solid #ddd",
+                    textAlign: "left",
+                    padding: "8px",
+                  }}
+                >
+                  {user.company.name}
+                </Td>
+                <Td
+                  sx={{
+                    border: "1px solid #ddd",
+                    textAlign: "left",
+                    padding: "8px",
+                  }}
+                >
+                  <div style={{ display: "flex", gap: "1rem" }}>
+                    <Button onClick={handleEditModal} className="edit">
+                      Edit User
+                    </Button>
+                    <Button className="delete">Delete User</Button>
+                  </div>
+                </Td>
+              </Tr>
+            ))}
+          </Tbody>
+        </Table>
+      </TableContainer>
+      <EditModal isOpen={isOpen} />
     </div>
   );
 }
