@@ -17,45 +17,93 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { useState } from "react";
-
 import "./index.css";
-function EditModal({ isOpen, onClose, user }) {
-    const [formData, setFormData] = useState({
-        name: user.name,
+import axios from "axios";
+
+function EditModal({ isOpen, onClose, user, setUsers }) {
+  const [formData, setFormData] = useState({
+    name: user.name,
+    email: user.email,
+    companyName: user.company.name,
+  });
+  const [emailError, setEmailError] = useState(null);
+
+  const handleEmailChange = (event) => {
+    const email = event.target.value;
+    setFormData({
+      ...formData,
+      email,
+    });
+
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      setEmailError("Invalid email address");
+    } else {
+      setEmailError(null);
+    }
+    if (email === "") {
+      setEmailError(null);
+      setFormData({
+        ...formData,
         email: user.email,
-        companyName: user.company.name,
       });
-    const [emailError, setEmailError] = useState(null);
+    }
+  };
 
-    const handleEmailChange = (event) => {
-        const email = event.target.value;
-        setFormData({
-          ...formData,
-          email,
+  const handleNameChange = (event) => {
+    const name = event.target.value;
+    setFormData({
+      ...formData,
+      name,
+    });
+  };
+
+  const handleCompanyNameChange = (event) => {
+    const companyName = event.target.value;
+    setFormData({
+      ...formData,
+      companyName,
+    });
+  };
+
+  const handleSave = () => {
+    if (!emailError) {
+      onClose();
+      setUsers((prevUsers) => {
+        return prevUsers.map((prevUser) => {
+          if (prevUser.id === user.id) {
+            return {
+              ...prevUser,
+              name: formData.name,
+              email: formData.email,
+              company: {
+                ...prevUser.company,
+                name: formData.companyName,
+              },
+            };
+          }
+          return prevUser;
         });
-    
-        if (!/^\S+@\S+\.\S+$/.test(email)) {
-          setEmailError("Invalid email address");
-        } else {
-          setEmailError(null);
-        }
-      };
+      });
+      updateUser(user.id, formData);
+    } else {
+      alert("Please enter valid email");
+    }
+  };
 
-      const handleSave = () => {
-     
-        if (!emailError) {
-      
-          onClose();
+  const updateUser = async (id, data) => {
+    const url = `https://jsonplaceholder.typicode.com/users/${id}`;
+    const response = await axios
+      .put(url, data)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    return response;
+  };
 
 
-        }
-        else {
-            return(
-                <div>Error</div>
-            );
-        }
-      };
-    
   return (
     <Modal sx={{}} isOpen={isOpen} onClose={onClose}>
       <ModalOverlay sx={{ backgroundColor: "rgba(0, 0, 0, 0.4)" }} />
@@ -97,23 +145,34 @@ function EditModal({ isOpen, onClose, user }) {
             onClick={onClose}
           />
           <ModalBody>
-            <FormControl >
+            <FormControl>
               <FormLabel>Name</FormLabel>
-              <Input placeholder={user.name} type="name" />
+              <Input
+                onChange={handleNameChange}
+                placeholder={user.name}
+                type="name"
+              />
             </FormControl>
-            <FormControl isInvalid={emailError} >
+            <FormControl isInvalid={emailError}>
               <FormLabel>Email</FormLabel>
-              <Input placeholder={user.email} type="email" />
+              <Input
+                onChange={handleEmailChange}
+                placeholder={user.email}
+                type="email"
+              />
             </FormControl>
             <FormControl>
               <FormLabel>Company Name</FormLabel>
-              <Input placeholder={user.company.name} type="name" />
+              <Input
+                onChange={handleCompanyNameChange}
+                placeholder={user.company.name}
+                type="name"
+              />
             </FormControl>
-         
           </ModalBody>
           <Button mr={3} onClick={handleSave}>
-              Save
-            </Button>
+            Save
+          </Button>
         </>
       </ModalContent>
     </Modal>

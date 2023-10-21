@@ -41,9 +41,11 @@
   }
 
   .custom-modal {
-    /* Add your custom styles here */
-    background-color: #ffffff; /* Example background color */
-    border-radius: 8px; /* Example border radius */
-    padding: 20px; /* Example padding */
-    /* Add any other styles as needed */
+
+    background-color: #ffffff; 
+    border-radius: 8px; 
+    padding: 20px; 
+
   }
+
+  

@@ -147,6 +147,7 @@ function Users() {
                   user={user}
                   isOpen={isOpen===user.id}
                   onClose={handleCloseEditModal}
+                  setUsers={setUsers}
                 />
               </>
             ))}
