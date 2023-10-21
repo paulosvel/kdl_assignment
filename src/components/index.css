@@ -1,14 +1,14 @@
-*{
-    font-family: sans-serif;
+* {
+  font-family: sans-serif;
 }
 
 .delete {
   background-color: #ff0000;
-  color: #fff; 
-  border: none; 
-  padding: 8px 16px; 
-  cursor: pointer; 
-  border-radius: 4px; 
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
 .delete:hover {
@@ -16,36 +16,53 @@
 }
 
 .edit {
-    background-color: #007bff; 
-    color: #fff;
-    border: none; 
-    padding: 8px 16px; 
-    cursor: pointer; 
-    border-radius: 4px; 
-  }
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
 
-  .edit:hover {
-    background-color: #0056b3; 
-  }
+.edit:hover {
+  background-color: #0056b3;
+}
 
-  .add {
-    background-color: #28a745; 
-    color: #fff; 
-    border: none; 
-    padding: 8px 16px; 
-    cursor: pointer; 
-    border-radius: 4px; 
-  }
-  .add:hover {
-    background-color: #1e7e34; 
-  }
+.add {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.add:hover {
+  background-color: #1e7e34;
+}
 
-  .custom-modal {
+.custom-modal {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+}
 
-    background-color: #ffffff; 
-    border-radius: 8px; 
-    padding: 20px; 
+.form-control {
+  margin-bottom: 16px;
+}
 
-  }
+.form-label {
+  font-weight: bold;
+}
 
-  
+.form-input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #007bff;
+}

@@ -4,7 +4,6 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
   Button,
@@ -12,21 +11,34 @@ import {
 import {
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   Input,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import "./index.css";
 import axios from "axios";
 
-function EditModal({ isOpen, onClose, user, setUsers }) {
+
+import "./index.css";
+function EditModal({ isOpen, onClose, user,setUsers }) {
   const [formData, setFormData] = useState({
     name: user.name,
     email: user.email,
     companyName: user.company.name,
   });
   const [emailError, setEmailError] = useState(null);
+
+  const updateUser = async (id, data) => {
+    const url = `https://jsonplaceholder.typicode.com/users/${id}`;
+    const response = await axios
+      .put(url, data)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    return response;
+  };
+
 
   const handleEmailChange = (event) => {
     const email = event.target.value;
@@ -44,7 +56,7 @@ function EditModal({ isOpen, onClose, user, setUsers }) {
       setEmailError(null);
       setFormData({
         ...formData,
-        email: user.email,
+        email: user.email, 
       });
     }
   };
@@ -55,7 +67,7 @@ function EditModal({ isOpen, onClose, user, setUsers }) {
       ...formData,
       name,
     });
-  };
+  }
 
   const handleCompanyNameChange = (event) => {
     const companyName = event.target.value;
@@ -63,7 +75,8 @@ function EditModal({ isOpen, onClose, user, setUsers }) {
       ...formData,
       companyName,
     });
-  };
+  }
+
 
   const handleSave = () => {
     if (!emailError) {
@@ -89,20 +102,6 @@ function EditModal({ isOpen, onClose, user, setUsers }) {
       alert("Please enter valid email");
     }
   };
-
-  const updateUser = async (id, data) => {
-    const url = `https://jsonplaceholder.typicode.com/users/${id}`;
-    const response = await axios
-      .put(url, data)
-      .then((response) => {
-        return response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    return response;
-  };
-
 
   return (
     <Modal sx={{}} isOpen={isOpen} onClose={onClose}>
@@ -145,32 +144,51 @@ function EditModal({ isOpen, onClose, user, setUsers }) {
             onClick={onClose}
           />
           <ModalBody>
-            <FormControl>
+            <FormControl sx={{ pb: "20px", pt: "40px" }}>
               <FormLabel>Name</FormLabel>
               <Input
-                onChange={handleNameChange}
                 placeholder={user.name}
                 type="name"
+                sx={{ borderRadius: "5px", padding: "16px" }}
+                onChange={handleNameChange}
               />
             </FormControl>
-            <FormControl isInvalid={emailError}>
+            <FormControl isInvalid={emailError} sx={{ pb: "20px" }}>
               <FormLabel>Email</FormLabel>
               <Input
-                onChange={handleEmailChange}
                 placeholder={user.email}
+                sx={{ borderRadius: "5px", padding: "16px" }}
                 type="email"
+                onChange={handleEmailChange}
               />
             </FormControl>
             <FormControl>
               <FormLabel>Company Name</FormLabel>
               <Input
-                onChange={handleCompanyNameChange}
                 placeholder={user.company.name}
                 type="name"
+                sx={{ borderRadius: "5px", padding: "16px" }}
+                onChange={handleCompanyNameChange}
               />
             </FormControl>
           </ModalBody>
-          <Button mr={3} onClick={handleSave}>
+          <Button
+            onClick={handleSave}
+            variant={"solid"}
+            sx={{
+              width: "200px",
+              borderRadius: "26px",
+              height: "25px",
+              mt: "60px",
+              backgroundColor: "#00B87C",
+              border: "none",
+              _hover: {
+                backgroundColor: "#00B87C",
+                opacity: "0.8",
+                cursor: "pointer",
+              },
+            }}
+          >
             Save
           </Button>
         </>
