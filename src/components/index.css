@@ -40,12 +40,10 @@
     background-color: #1e7e34; 
   }
 
-  .modal{
-    position:absolute;
-    top: 0;
-    right: 26%;
-   
-    width: 50%;
-    height: 50%;
-    background-color: rgb(0,0,0,0.4);
+  .custom-modal {
+    /* Add your custom styles here */
+    background-color: #ffffff; /* Example background color */
+    border-radius: 8px; /* Example border radius */
+    padding: 20px; /* Example padding */
+    /* Add any other styles as needed */
   }

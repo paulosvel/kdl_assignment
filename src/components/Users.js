@@ -38,6 +38,10 @@ function Users() {
   const handleEditModal = () => {
     setIsOpen(!isOpen);
   };
+
+  const handleCloseEditModal = () => {
+    setIsOpen(false);
+  };
   return (
     <div
       style={{ display: "flex", alignItems: "center", flexDirection: "column" }}
@@ -95,54 +99,60 @@ function Users() {
           </Thead>
           <Tbody>
             {users.map((user) => (
-              <Tr>
-                <Td
-                  sx={{
-                    border: "1px solid #ddd",
-                    textAlign: "left",
-                    padding: "8px",
-                  }}
-                >
-                  {user.name}
-                </Td>
-                <Td
-                  sx={{
-                    border: "1px solid #ddd",
-                    textAlign: "left",
-                    padding: "8px",
-                  }}
-                >
-                  {user.email}
-                </Td>
-                <Td
-                  sx={{
-                    border: "1px solid #ddd",
-                    textAlign: "left",
-                    padding: "8px",
-                  }}
-                >
-                  {user.company.name}
-                </Td>
-                <Td
-                  sx={{
-                    border: "1px solid #ddd",
-                    textAlign: "left",
-                    padding: "8px",
-                  }}
-                >
-                  <div style={{ display: "flex", gap: "1rem" }}>
-                    <Button onClick={handleEditModal} className="edit">
-                      Edit User
-                    </Button>
-                    <Button className="delete">Delete User</Button>
-                  </div>
-                </Td>
-              </Tr>
+              <>
+                <Tr>
+                  <Td
+                    sx={{
+                      border: "1px solid #ddd",
+                      textAlign: "left",
+                      padding: "8px",
+                    }}
+                  >
+                    {user.name}
+                  </Td>
+                  <Td
+                    sx={{
+                      border: "1px solid #ddd",
+                      textAlign: "left",
+                      padding: "8px",
+                    }}
+                  >
+                    {user.email}
+                  </Td>
+                  <Td
+                    sx={{
+                      border: "1px solid #ddd",
+                      textAlign: "left",
+                      padding: "8px",
+                    }}
+                  >
+                    {user.company.name}
+                  </Td>
+                  <Td
+                    sx={{
+                      border: "1px solid #ddd",
+                      textAlign: "left",
+                      padding: "8px",
+                    }}
+                  >
+                    <div style={{ display: "flex", gap: "1rem" }}>
+                      <Button onClick={handleEditModal} className="edit">
+                        Edit User
+                      </Button>
+                      <Button className="delete">Delete User</Button>
+                    </div>
+                  </Td>
+                </Tr>
+                <EditModal
+                  user={user}
+                  isOpen={isOpen}
+                  onClose={handleCloseEditModal}
+                />
+              </>
             ))}
           </Tbody>
         </Table>
       </TableContainer>
-      <EditModal isOpen={isOpen} />
     </div>
   );
 }
