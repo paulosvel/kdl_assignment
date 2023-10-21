@@ -19,7 +19,7 @@ import EditModal from "./EditModal";
 function Users() {
   const url = "https://jsonplaceholder.typicode.com/users";
   const [users, setUsers] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(null);
   const getUsers = async () => {
     const response = await axios
       .get(url)
@@ -35,12 +35,12 @@ function Users() {
   useEffect(() => {
     getUsers();
   }, []);
-  const handleEditModal = () => {
-    setIsOpen(!isOpen);
+  const handleEditModal = (userId) => {
+    setIsOpen(userId);
   };
 
   const handleCloseEditModal = () => {
-    setIsOpen(false);
+    setIsOpen(null);
   };
   return (
     <div
@@ -136,7 +136,7 @@ function Users() {
                     }}
                   >
                     <div style={{ display: "flex", gap: "1rem" }}>
-                      <Button onClick={handleEditModal} className="edit">
+                      <Button onClick= {() => handleEditModal(user.id)} className="edit">
                         Edit User
                       </Button>
                       <Button className="delete">Delete User</Button>
@@ -145,7 +145,7 @@ function Users() {
                 </Tr>
                 <EditModal
                   user={user}
-                  isOpen={isOpen}
+                  isOpen={isOpen===user.id}
                   onClose={handleCloseEditModal}
                 />
               </>
