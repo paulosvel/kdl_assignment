@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+# User Management React Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a React application for managing users using a mock API. It allows you to view a list of users, add new users, update existing users, and delete users.
+Additionally, it provides features such as client-side form validation, search and filter functionality, and more.
 
-## Available Scripts
+# Features
 
-In the project directory, you can run:
+View Users: Browse a list of users with columns for Name, Email, and Company Name in a tabular format.
 
-### `npm start`
+Add User: Click on the "Add User" button to open a form modal for data entry. Ensure you fill in all required fields, and client-side form validation will prevent
+incomplete or invalid data submission.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Update User: To update an existing user, click the "Edit" button next to the user's information. You can modify the Name, Email, and Company Name fields.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Delete User: When deleting a user, you'll be prompted for confirmation to ensure you don't accidentally delete a user.
 
-### `npm test`
+Search and Filter: Use the search and filter functionality to find specific users or filter users by criteria such as company name.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Pagination: If the user list is long, pagination is provided to handle a large number of users effectively.
 
-### `npm run build`
+Loading: Loading indicator when opening the app.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Technologies Used
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- React.js
+- Chakra UI
+- Axios for HTTP requests
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Requirements
 
-### `npm run eject`
+To use this application, you need to meet the following requirements:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Node.js and npm installed on your system.
+- A code editor of your choice (e.g., Visual Studio Code).
+- Internet connectivity to access the provided mock API.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Getting Started
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Clone this repository to your local machine:
+   git clone https://github.com/paulosvel/kdl_assignment
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+2. Navigate to the project directory and open it in VSCode
 
-## Learn More
+3. npm install (to install the project dependencies)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+4. npm start (to start the development server)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+5. Open your web browser and visit http://localhost:3000
